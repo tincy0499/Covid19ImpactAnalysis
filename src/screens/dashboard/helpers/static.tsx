@@ -14,4 +14,10 @@ const LOCATION_DROPDOWN = {
   ],
 };
 
-export { LOCATION_DROPDOWN };
+const SCORE_KEYS = {
+  JOY_SCORE: "joyScore",
+  FEAR_SCORE: "fearScore",
+  SADNESS_SCORE: "sadnessScore",
+};
+
+export { LOCATION_DROPDOWN, SCORE_KEYS };
