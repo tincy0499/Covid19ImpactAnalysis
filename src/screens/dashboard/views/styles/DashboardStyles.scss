@@ -1,0 +1,13 @@
+.dashboard {
+  &__province-button {
+    cursor: pointer;
+  }
+
+  &__province-button:hover {
+    font-weight: bold;
+  }
+
+  &__province-button-selected {
+    font-weight: bold;
+  }
+}
