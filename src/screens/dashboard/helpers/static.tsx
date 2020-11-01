@@ -20,4 +20,20 @@ const SCORE_KEYS = {
   SADNESS_SCORE: "sadnessScore",
 };
 
-export { LOCATION_DROPDOWN, SCORE_KEYS };
+const DASHBOARD_CONTENT = {
+  LOCATION_HEADER: 'Select a location to see the impact of Covid19.',
+  SELECT_PROVINCE: 'Select a province/state to see the emotional impact of Covid19.',
+};
+
+const BAR_LABEL = {
+  NAME: 'name',
+  EMOTION: 'Emotion',
+};
+
+const EMOTIONS = {
+  JOY: 'Joy',
+  SADNESS: 'Sadness',
+  FEAR: 'Fear',
+};
+
+export { LOCATION_DROPDOWN, SCORE_KEYS, DASHBOARD_CONTENT, BAR_LABEL, EMOTIONS };

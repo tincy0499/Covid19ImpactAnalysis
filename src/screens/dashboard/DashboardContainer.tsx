@@ -1,21 +1,26 @@
 import React, { Fragment, useState } from "react";
 import { Header, Loader, Select, Table } from "semantic-ui-react";
+import classnames from 'classnames';
+
 import api from "../../commons/api";
 import SERVICES from "./helpers/services";
-
-import { LOCATION_DROPDOWN } from "./helpers/static";
-import { SCORE_DATA } from "./helpers/types";
+import { BAR_LABEL, DASHBOARD_CONTENT, LOCATION_DROPDOWN } from "./helpers/static";
+import { EMOTION_DATA, PROVINCE_SCORE, SCORE_DATA, SCORE_DATA_API } from "./helpers/types";
 import normalizeScoreData from "./helpers/utils";
+import BarChartView from "./views/components/BarChartView";
+import "./views/styles/DashboardStyles.scss";
 
 function DashboardContainer() {
   const [selectedCountry, updateSelectedCountry] = useState<string>("");
   const [isLoadingScores, updateIsLoadingScores] = useState<boolean>(false);
   const [scoreList, updateScoreList] = useState<null | SCORE_DATA[]>(null);
+  const [barChartData, updateBarChartData] = useState<null | PROVINCE_SCORE[]>(null);
+  const [selectedProvince, updateSelectedProvince] = useState("");
 
   const getScores = async (value: string) => {
     updateIsLoadingScores(true);
     try {
-      const { data } = await api.get(`${SERVICES.GET_SCORES}/${value}`);
+      const { data } = await api.get(`${SERVICES.GET_SCORES_MOCKY}/${value}`);
       console.log("data: ", data);
       updateScoreList(normalizeScoreData(data));
     } catch (err) {}
@@ -27,11 +32,26 @@ function DashboardContainer() {
     getScores(value);
   };
 
-  const getImpactTable = () => {
-    if (!scoreList) return null;
+  const onStateClick = (score: SCORE_DATA) => {
+    return () => {
+      const chartData = [];
+      chartData.push({ name: "Joy", Emotion: score.joyScore });
+      chartData.push({ name: "Sadness", Emotion: score.sadnessScore });
+      chartData.push({ name: "Fear", Emotion: score.fearScore });
+      updateBarChartData(chartData);
+      updateSelectedProvince(score.provinceName)
+    };
+  };
+
+  const getImpactView = () => {
+    if (!scoreList) {
+      return null;
+    }
 
     return (
-      <Table celled>
+      <Fragment>
+        <BarChartView data={barChartData} />
+        <Table celled>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>State</Table.HeaderCell>
@@ -42,13 +62,21 @@ function DashboardContainer() {
           return (
             <Table.Body>
               <Table.Row>
-                <Table.Cell>{score.provinceName}</Table.Cell>
+                <Table.Cell>
+                  <div 
+                    onClick={onStateClick(score)} 
+                    className={classnames({"dashboard__province-button": true, "dashboard__province-button-selected": selectedProvince === score.provinceName })}
+                  >
+                    {score.provinceName}
+                  </div>
+                  </Table.Cell>
                 <Table.Cell>{score.score}</Table.Cell>
               </Table.Row>
             </Table.Body>
           );
         })}
       </Table>
+      </Fragment>
     );
   };
 
@@ -58,7 +86,7 @@ function DashboardContainer() {
 
   return (
     <Fragment>
-      <Header as="h1">Select a location to see the impact of Covid19.</Header>
+      <Header as="h1">{DASHBOARD_CONTENT.LOCATION_HEADER}</Header>
       <Select
         placeholder={LOCATION_DROPDOWN.PLACEHOLDER}
         options={LOCATION_DROPDOWN.ITEMS}
@@ -66,7 +94,7 @@ function DashboardContainer() {
         onChange={onDropdownItemChange}
         fluid
       />
-      {getImpactTable()}
+      {getImpactView()}
     </Fragment>
   );
 }
