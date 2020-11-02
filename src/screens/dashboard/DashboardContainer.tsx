@@ -13,7 +13,8 @@ import "./views/styles/DashboardStyles.scss";
 function DashboardContainer() {
   const [selectedCountry, updateSelectedCountry] = useState<string>("");
   const [isLoadingScores, updateIsLoadingScores] = useState<boolean>(false);
-  const [scoreList, updateScoreList] = useState<null | SCORE_DATA[]>(null);
+  // ToDo: undefined should not be a valid type. update this when it is handled in getScores method.
+  const [scoreList, updateScoreList] = useState<null | undefined | SCORE_DATA[]>(null);
   const [barChartData, updateBarChartData] = useState<null | PROVINCE_SCORE[]>(null);
   const [selectedProvince, updateSelectedProvince] = useState("");
 
@@ -21,7 +22,6 @@ function DashboardContainer() {
     updateIsLoadingScores(true);
     try {
       const { data } = await api.get(`${SERVICES.GET_SCORES_MOCKY}/${value}`);
-      console.log("data: ", data);
       updateScoreList(normalizeScoreData(data));
     } catch (err) {}
     updateIsLoadingScores(false);
