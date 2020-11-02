@@ -1,6 +1,10 @@
 import { SCORE_DATA, SCORE_DATA_API } from "./types";
 
 const normalizeScoreData = (scoreData: SCORE_DATA_API) => {
+  if (!scoreData || Array.isArray(scoreData)) {
+    return;
+  }
+
   const NORMALIZED_LIST = [] as SCORE_DATA[];
 
   Object.keys(scoreData).forEach((scoreKey: string) => {

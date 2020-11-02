@@ -7,7 +7,6 @@ import { BAR_LABEL, DASHBOARD_CONTENT } from '../../helpers/static';
 import "../styles/BarChartViewStyles.scss";
 
 const BarChartView = ({ data }: any) => {
-  console.log('data:', data);
 
   return (
     <div className="bar-chart-view__container">

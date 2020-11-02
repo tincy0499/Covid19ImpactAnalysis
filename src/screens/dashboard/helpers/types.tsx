@@ -6,7 +6,7 @@ type SCORE_DATA = {
   score: string;
 };
 
-type SCORE_DATA_API = {
+interface SCORE_DATA_API {
   [name: string]: SCORE_DATA;
 };
 
