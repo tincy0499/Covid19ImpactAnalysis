@@ -23,7 +23,7 @@ function DashboardContainer() {
     try {
       const { data } = await api.get(`${SERVICES.GET_SCORES_MOCKY}/${value}`);
       updateScoreList(normalizeScoreData(data));
-    } catch (err) {}
+    } catch (err) { }
     updateIsLoadingScores(false);
   };
 
@@ -52,30 +52,30 @@ function DashboardContainer() {
       <Fragment>
         <BarChartView data={barChartData} />
         <Table celled>
-        <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell>State</Table.HeaderCell>
-            <Table.HeaderCell>Emotions</Table.HeaderCell>
-          </Table.Row>
-        </Table.Header>
-        {scoreList.map((score) => {
-          return (
-            <Table.Body>
-              <Table.Row>
-                <Table.Cell>
-                  <div 
-                    onClick={onStateClick(score)} 
-                    className={classnames({"dashboard__province-button": true, "dashboard__province-button-selected": selectedProvince === score.provinceName })}
-                  >
-                    {score.provinceName}
-                  </div>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>State</Table.HeaderCell>
+              <Table.HeaderCell>Emotions</Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+          {scoreList.map((score) => {
+            return (
+              <Table.Body>
+                <Table.Row>
+                  <Table.Cell>
+                    <div
+                      onClick={onStateClick(score)}
+                      className={classnames({ "dashboard__province-button": true, "dashboard__province-button-selected": selectedProvince === score.provinceName })}
+                    >
+                      {score.provinceName}
+                    </div>
                   </Table.Cell>
-                <Table.Cell>{score.score}</Table.Cell>
-              </Table.Row>
-            </Table.Body>
-          );
-        })}
-      </Table>
+                  <Table.Cell>{score.score}</Table.Cell>
+                </Table.Row>
+              </Table.Body>
+            );
+          })}
+        </Table>
       </Fragment>
     );
   };
@@ -93,6 +93,7 @@ function DashboardContainer() {
         value={selectedCountry}
         onChange={onDropdownItemChange}
         fluid
+        search
       />
       {getImpactView()}
     </Fragment>
