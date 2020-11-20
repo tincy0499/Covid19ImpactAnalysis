@@ -1,13 +1,29 @@
 import React from "react";
+import {
+  BrowserRouter,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 import DashboardContainer from "./screens/dashboard/DashboardContainer";
 import "./AppStyles.scss";
+import EmotionAnalysis from "./screens/emotionAnalysis/EmotionAnalysis";
 
 function App() {
   return (
     <div className="app__container">
       <div className="app__routes-wrapper">
-        <DashboardContainer />
+        <BrowserRouter>
+          <Switch>
+            <Route path="/emotionAnalysis">
+              <EmotionAnalysis />
+            </Route>
+            <Route path="/">
+              <DashboardContainer />
+            </Route>
+          </Switch>
+        </BrowserRouter>
       </div>
     </div>
   );

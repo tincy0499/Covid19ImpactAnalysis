@@ -23,7 +23,9 @@ function DashboardContainer() {
     try {
       const { data } = await api.get(`${SERVICES.GET_SCORES_MOCKY}/${value}`);
       updateScoreList(normalizeScoreData(data));
-    } catch (err) { }
+    } catch (err) {
+      // ToDo: handle api failure
+    }
     updateIsLoadingScores(false);
   };
 
