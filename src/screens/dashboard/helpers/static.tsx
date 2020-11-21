@@ -23,6 +23,7 @@ const SCORE_KEYS = {
 const DASHBOARD_CONTENT = {
   LOCATION_HEADER: 'Select a location to see the impact of Covid19.',
   SELECT_PROVINCE: 'Select a province/state to see the emotional impact of Covid19.',
+  SUBMIT_BUTTON: 'Submit'
 };
 
 const BAR_LABEL = {

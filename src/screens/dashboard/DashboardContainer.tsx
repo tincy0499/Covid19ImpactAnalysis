@@ -1,12 +1,12 @@
 import React, { Fragment, useState } from "react";
-import { Header, Loader, Select, Table } from "semantic-ui-react";
+import { Button, Header, Loader, Select, Table } from "semantic-ui-react";
 import classnames from 'classnames';
 
 import api from "../../commons/api";
 import SERVICES from "./helpers/services";
 import { BAR_LABEL, DASHBOARD_CONTENT, LOCATION_DROPDOWN } from "./helpers/static";
 import { EMOTION_DATA, PROVINCE_SCORE, SCORE_DATA, SCORE_DATA_API } from "./helpers/types";
-import normalizeScoreData from "./helpers/utils";
+import { normalizeScoreData } from "./helpers/utils";
 import BarChartView from "./views/components/BarChartView";
 import "./views/styles/DashboardStyles.scss";
 
@@ -18,10 +18,10 @@ function DashboardContainer() {
   const [barChartData, updateBarChartData] = useState<null | PROVINCE_SCORE[]>(null);
   const [selectedProvince, updateSelectedProvince] = useState("");
 
-  const getScores = async (value: string) => {
+  const getScores = async () => {
     updateIsLoadingScores(true);
     try {
-      const { data } = await api.get(`${SERVICES.GET_SCORES_MOCKY}/${value}`);
+      const { data } = await api.get(`${SERVICES.GET_SCORES_MOCKY}/${selectedCountry}`);
       updateScoreList(normalizeScoreData(data));
     } catch (err) {
       // ToDo: handle api failure
@@ -31,7 +31,10 @@ function DashboardContainer() {
 
   const onDropdownItemChange = (e: any, { value }: any) => {
     updateSelectedCountry(value);
-    getScores(value);
+  };
+
+  const onSubmitClick = () => {
+    getScores();
   };
 
   const onStateClick = (score: SCORE_DATA) => {
@@ -57,7 +60,7 @@ function DashboardContainer() {
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>State</Table.HeaderCell>
-              <Table.HeaderCell>Emotions</Table.HeaderCell>
+              <Table.HeaderCell>Emotion</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           {scoreList.map((score) => {
@@ -83,20 +86,29 @@ function DashboardContainer() {
   };
 
   if (isLoadingScores) {
-    return <Loader size="medium" active />;
+    return <Loader size="huge" active />;
   }
 
   return (
     <Fragment>
       <Header as="h1">{DASHBOARD_CONTENT.LOCATION_HEADER}</Header>
-      <Select
-        placeholder={LOCATION_DROPDOWN.PLACEHOLDER}
-        options={LOCATION_DROPDOWN.ITEMS}
-        value={selectedCountry}
-        onChange={onDropdownItemChange}
-        fluid
-        search
-      />
+      <form onSubmit={onSubmitClick}>
+        <Select
+          placeholder={LOCATION_DROPDOWN.PLACEHOLDER}
+          options={LOCATION_DROPDOWN.ITEMS}
+          value={selectedCountry}
+          onChange={onDropdownItemChange}
+          className="dashboard__location-select"
+          fluid
+          search
+        />
+        <Button
+          primary
+          disabled={!selectedCountry}
+        >
+          {DASHBOARD_CONTENT.SUBMIT_BUTTON}
+        </Button>
+      </form>
       {getImpactView()}
     </Fragment>
   );
