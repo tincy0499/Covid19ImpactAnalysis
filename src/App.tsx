@@ -9,6 +9,7 @@ import {
 import DashboardContainer from "./screens/dashboard/DashboardContainer";
 import "./AppStyles.scss";
 import EmotionAnalysis from "./screens/emotionAnalysis/EmotionAnalysis";
+import Landing from "./screens/landing/Landing";
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
           <Switch>
             <Route path="/emotionAnalysis">
               <EmotionAnalysis />
+            </Route>
+            <Route path="/landing">
+              <Landing />
             </Route>
             <Route path="/">
               <DashboardContainer />

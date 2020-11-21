@@ -54,7 +54,9 @@ const normalizeEmotionData = (emotionData) => {
     const SADNESS_SCORE = SCORE_ITEM.sadnessScore;
     let score = "NEUTRAL";
 
-    if (JOY_SCORE >= FEAR_SCORE && JOY_SCORE >= SADNESS_SCORE) {
+    if (JOY_SCORE === 0 && FEAR_SCORE === 0 && SADNESS_SCORE === 0) {
+      score = "Neutral";
+    } else if (JOY_SCORE >= FEAR_SCORE && JOY_SCORE >= SADNESS_SCORE) {
       score = "Happy";
     } else if (FEAR_SCORE >= JOY_SCORE && FEAR_SCORE >= SADNESS_SCORE) {
       score = "Worried";

@@ -35,6 +35,7 @@ const EMOTIONS = {
   JOY: 'Joy',
   SADNESS: 'Sadness',
   FEAR: 'Fear',
+  NEUTRAL: 'Neutral'
 };
 
 const EMOTIONS_EMOJI = {
