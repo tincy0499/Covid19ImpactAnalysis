@@ -1,23 +1,23 @@
-import normalizeScoreData from '../screens/dashboard/helpers/utils';
+import { normalizeScoreData } from '../screens/dashboard/helpers/utils';
 
 const DUMMY_DATA_EMOTIONS_VALID = {
   "Karnataka": {
-      "provinceName": "Karnataka",
-      "analyticScore": 3.988263,
-      "tentativeScore": 1.42615,
-      "confidentScore": 0,
-      "joyScore": 10,
-      "sadnessScore": 100,
-      "fearScore": 30
+    "provinceName": "Karnataka",
+    "analyticScore": 3.988263,
+    "tentativeScore": 1.42615,
+    "confidentScore": 0,
+    "joyScore": 10,
+    "sadnessScore": 100,
+    "fearScore": 30
   },
   "Punjab": {
-      "provinceName": "Punjab",
-      "analyticScore": 4.749525,
-      "tentativeScore": 2.139225,
-      "confidentScore": 0,
-      "joyScore": 30,
-      "sadnessScore": 20,
-      "fearScore": 100
+    "provinceName": "Punjab",
+    "analyticScore": 4.749525,
+    "tentativeScore": 2.139225,
+    "confidentScore": 0,
+    "joyScore": 30,
+    "sadnessScore": 20,
+    "fearScore": 100
   }
 };
 
@@ -34,13 +34,13 @@ const DUMMY_DATA_EMOTIONS_VALID_EXPECT = [
   },
   {
     "provinceName": "Punjab",
-      "analyticScore": 4.749525,
-      "tentativeScore": 2.139225,
-      "confidentScore": 0,
-      "joyScore": 30,
-      "sadnessScore": 20,
-      "fearScore": 100,
-      "score": "Worried"
+    "analyticScore": 4.749525,
+    "tentativeScore": 2.139225,
+    "confidentScore": 0,
+    "joyScore": 30,
+    "sadnessScore": 20,
+    "fearScore": 100,
+    "score": "Worried"
   }
 ];
 
