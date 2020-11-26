@@ -3,10 +3,8 @@ import {
   BrowserRouter,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
 
-import DashboardContainer from "./screens/dashboard/DashboardContainer";
 import "./AppStyles.scss";
 import EmotionAnalysis from "./screens/emotionAnalysis/EmotionAnalysis";
 import Landing from "./screens/landing/Landing";

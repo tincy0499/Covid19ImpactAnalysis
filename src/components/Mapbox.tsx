@@ -29,7 +29,6 @@ const mapReducer = (state, action) => {
 };
 
 const Mapbox = () => {
-    const [map, updateMap] = useState(null);
     const [mapState, updateMapState] = useReducer(mapReducer, initialMapState);
     const [barChartData, updateBarChartData] = useState([
         { name: "Joy", Emotion: 0 },
@@ -61,8 +60,7 @@ const Mapbox = () => {
         geocoder.on('result', onRegionChange);
 
         map.addControl(geocoder);
-
-        updateMap(map);
+        // eslint-disable-next-line 
     }, []);
 
     const onRegionChange = (response) => {

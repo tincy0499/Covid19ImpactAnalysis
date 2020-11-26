@@ -4,8 +4,8 @@ import classnames from 'classnames';
 
 import api from "../../commons/api";
 import SERVICES from "./helpers/services";
-import { BAR_LABEL, DASHBOARD_CONTENT, LOCATION_DROPDOWN } from "./helpers/static";
-import { EMOTION_DATA, PROVINCE_SCORE, SCORE_DATA, SCORE_DATA_API } from "./helpers/types";
+import { DASHBOARD_CONTENT, LOCATION_DROPDOWN } from "./helpers/static";
+import { PROVINCE_SCORE, SCORE_DATA } from "./helpers/types";
 import { normalizeScoreData } from "./helpers/utils";
 import BarChartView from "./views/components/BarChartView";
 import "./views/styles/DashboardStyles.scss";

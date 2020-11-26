@@ -57,7 +57,7 @@ const DUMMY_DATA_EMOTIONS_INVALID = [
 ];
 
 describe('Running Dashboard Tests', () => {
-  test("test data normalizer", () => {
+  test("data normalizer", () => {
     expect(normalizeScoreData(DUMMY_DATA_EMOTIONS_VALID)).toEqual(DUMMY_DATA_EMOTIONS_VALID_EXPECT);
     expect(normalizeScoreData(null)).toEqual(undefined);
     expect(normalizeScoreData(undefined)).toEqual(undefined);
