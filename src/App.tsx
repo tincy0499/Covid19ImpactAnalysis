@@ -10,6 +10,7 @@ import DashboardContainer from "./screens/dashboard/DashboardContainer";
 import "./AppStyles.scss";
 import EmotionAnalysis from "./screens/emotionAnalysis/EmotionAnalysis";
 import Landing from "./screens/landing/Landing";
+import Mapbox from "./components/Mapbox";
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
               <Landing />
             </Route>
             <Route path="/">
-              <DashboardContainer />
+              <Mapbox />
             </Route>
           </Switch>
         </BrowserRouter>

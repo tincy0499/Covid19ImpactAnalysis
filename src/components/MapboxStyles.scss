@@ -1,0 +1,14 @@
+.mapbox-comp {
+    &__bar-chart-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        right: 10px;
+        position: absolute;
+        top: 100px;
+        background-color: rgba(255, 255, 255, 0.64);
+        padding: 10px 0;
+        border-radius: 10px;
+    }    
+}
