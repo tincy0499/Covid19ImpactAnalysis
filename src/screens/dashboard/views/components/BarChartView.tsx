@@ -41,7 +41,6 @@ const BarChartView = ({ data }: any) => {
           <Bar dataKey={BAR_LABEL.EMOTION}>
             {
               data.map((entry, index) => {
-                console.log(entry);
                 return (
                   <Cell key={`cell-${index}`} fill={EMOTION_BAR_COLORS[entry.name]} />
                 )

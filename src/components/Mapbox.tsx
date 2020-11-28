@@ -5,6 +5,7 @@ import Loader from "react-loader-spinner";
 
 import BarChartView from '../screens/dashboard/views/components/BarChartView';
 import "./MapboxStyles.scss";
+import api from '../commons/api';
 
 const MAP_ACTION_TYPES = {
     UPDATE_COORDS: "UPDATE_COORDS",
@@ -47,9 +48,6 @@ const Mapbox = () => {
             zoom: mapState.zoom,
             interactive: false,
         });
-        map.on('moveend', async (res) => {
-            console.log('respppp: ', res, mapState.lat, mapState.lng);
-        });
 
         // adding geocoder
         const geocoder = new MapBoxGeocoder({
@@ -63,7 +61,7 @@ const Mapbox = () => {
         // eslint-disable-next-line 
     }, []);
 
-    const onRegionChange = (response) => {
+    const onRegionChange = async (response) => {
         if (!response.result) return;
 
         updateMapState({
@@ -80,35 +78,39 @@ const Mapbox = () => {
         ]);
         updateIsLoading(true);
 
-        setTimeout(() => {
+        try {
+            const { data } = await api.get(`https://covid19impactanalysisapipython.herokuapp.com/province/score/${response.result.center[1]},${response.result.center[0]}`);
             updateBarChartData([
-                { name: "Joy", Emotion: 40 },
-                { name: "Sadness", Emotion: 50 },
-                { name: "Fear", Emotion: 20 }
+                { name: "Joy", Emotion: data.joyScore },
+                { name: "Sadness", Emotion: data.sadnessScore },
+                { name: "Fear", Emotion: data.fearScore }
             ]);
-            updateIsLoading(false);
-        }, 3000);
+        } catch (err) {
+            // ToDo: handle api error
+        }
+        updateIsLoading(false);
     };
 
     return (
         <div>
             <div ref={mapContainer} className="mapContainer" />
-            <div className="mapbox-comp__bar-chart-container">
-                <h4>Search for a province/state to get started.</h4>
-                <Loader
-                    type="Audio"
-                    color="#00BFFF"
-                    height={50}
-                    width={50}
-                    visible={isLoading}
-                    style={{
-                        position: 'absolute',
-                        zIndex: 10
-                    }}
-                />
-                <BarChartView data={barChartData} />
+            <div className="mapbox-comp__result-container">
+                <div className="mapbox-comp__bar-chart-container">
+                    <h4>Search for a province/state to get started.</h4>
+                    <Loader
+                        type="Audio"
+                        color="#00BFFF"
+                        height={50}
+                        width={50}
+                        visible={isLoading}
+                        style={{
+                            position: 'absolute',
+                            zIndex: 10
+                        }}
+                    />
+                    <BarChartView data={barChartData} />
+                </div>
             </div>
-
         </div>
     );
 };
